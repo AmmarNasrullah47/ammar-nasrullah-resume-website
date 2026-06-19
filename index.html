@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ammar Website</title>
+    <style>
+        /* CSS Reset & Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0a0a0a;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(34, 197, 94, 0.6);
+            }
+        }
+
+        @keyframes typing {
+            from {
+                width: 0;
+            }
+            to {
+                width: 100%;
+            }
+        }
+
+        @keyframes blink {
+            50% {
+                border-color: transparent;
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: scaleX(0);
+            }
+            to {
+                transform: scaleX(1);
+            }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(34, 197, 94, 0.2);
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: #22c55e;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        nav a:hover::after {
+            width: 80%;
+        }
+
+        nav a:hover {
+            color: #22c55e;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 6rem 2rem 2rem;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(34, 197, 94, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(34, 197, 94, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #ffffff 0%, #22c55e 50%, #16a34a 100%);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 4s ease infinite;
+        }
+
+        .hero .subtitle {
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            color: #a3a3a3;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        .hero .tagline {
+            display: inline-block;
+            font-size: 1.2rem;
+            color: #22c55e;
+            padding: 0.75rem 2rem;
+            border: 2px solid #22c55e;
+            border-radius: 50px;
+            animation: glow 2s ease-in-out infinite;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .hero .tagline:hover {
+            background: #22c55e;
+            color: #0a0a0a;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: float 2s ease-in-out infinite;
+        }
+
+        .scroll-indicator span {
+            display: block;
+            width: 30px;
+            height: 50px;
+            border: 2px solid #22c55e;
+            border-radius: 25px;
+            position: relative;
+        }
+
+        .scroll-indicator span::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            width: 6px;
+            height: 6px;
+            background: #22c55e;
+            border-radius: 50%;
+            transform: translateX(-50%);
+            animation: float 1.5s ease-in-out infinite;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            color: #ffffff;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #22c55e, #16a34a);
+            margin: 1rem auto 0;
+            border-radius: 2px;
+            animation: slideIn 1s ease-out;
+            transform-origin: left;
+        }
+
+        /* About Section */
+        .about {
+            background: linear-gradient(180deg, #0a0a0a 0%, #111111 100%);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        @media (min-width: 768px) {
+            .about-content {
+                grid-template-columns: 300px 1fr;
+            }
+        }
+
+        .about-image {
+            position: relative;
+            animation: fadeInLeft 1s ease-out;
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+        }
+
+
+        .about-text {
+            animation: fadeInRight 1s ease-out;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            color: #d1d5db;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .about-text strong {
+            color: #22c55e;
+        }
+
+        /* Skills Section */
+        .skills {
+            background: #111111;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-card {
+            background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid rgba(34, 197, 94, 0.2);
+            transition: all 0.4s ease;
+            animation: fadeInUp 0.6s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .skill-card:nth-child(1) { animation-delay: 0.1s; }
+        .skill-card:nth-child(2) { animation-delay: 0.2s; }
+        .skill-card:nth-child(3) { animation-delay: 0.3s; }
+        .skill-card:nth-child(4) { animation-delay: 0.4s; }
+        .skill-card:nth-child(5) { animation-delay: 0.5s; }
+        .skill-card:nth-child(6) { animation-delay: 0.6s; }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            border-color: #22c55e;
+            box-shadow: 0 20px 40px rgba(34, 197, 94, 0.2);
+        }
+
+        .skill-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .skill-card h3 {
+            font-size: 1.3rem;
+            color: #22c55e;
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-card p {
+            color: #a3a3a3;
+            font-size: 0.95rem;
+        }
+
+        .skill-bar {
+            margin-top: 1rem;
+            height: 8px;
+            background: #2a2a2a;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .skill-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #22c55e, #16a34a);
+            border-radius: 4px;
+            transition: width 1.5s ease-out;
+        }
+
+        /* Experience Section */
+        .experience {
+            background: linear-gradient(180deg, #111111 0%, #0a0a0a 100%);
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, #22c55e, #16a34a);
+            border-radius: 3px;
+        }
+
+        @media (min-width: 768px) {
+            .timeline::before {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 40px;
+            padding-bottom: 3rem;
+            animation: fadeInUp 0.8s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .timeline-item:nth-child(1) { animation-delay: 0.2s; }
+        .timeline-item:nth-child(2) { animation-delay: 0.4s; }
+
+        @media (min-width: 768px) {
+            .timeline-item {
+                width: 50%;
+                padding-left: 0;
+                padding-right: 40px;
+            }
+
+            .timeline-item:nth-child(even) {
+                margin-left: 50%;
+                padding-left: 40px;
+                padding-right: 0;
+            }
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            background: #22c55e;
+            border-radius: 50%;
+            border: 4px solid #0a0a0a;
+            box-shadow: 0 0 20px rgba(34, 197, 94, 0.5);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @media (min-width: 768px) {
+            .timeline-item::before {
+                left: auto;
+                right: -10px;
+            }
+
+            .timeline-item:nth-child(even)::before {
+                right: auto;
+                left: -10px;
+            }
+        }
+
+        .timeline-content {
+            background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid rgba(34, 197, 94, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            border-color: #22c55e;
+            transform: scale(1.02);
+        }
+
+        .timeline-content h3 {
+            font-size: 1.4rem;
+            color: #22c55e;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content .date {
+            font-size: 0.9rem;
+            color: #a3a3a3;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .timeline-content .company {
+            font-size: 1.1rem;
+            color: #ffffff;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .timeline-content ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .timeline-content li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: #d1d5db;
+            font-size: 0.95rem;
+        }
+
+        .timeline-content li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: #22c55e;
+        }
+
+        /* Education Section */
+        .education {
+            background: #111111;
+        }
+
+        .education-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .education-card {
+            background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid rgba(34, 197, 94, 0.2);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            animation: fadeInUp 0.6s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .education-card:nth-child(1) { animation-delay: 0.1s; }
+        .education-card:nth-child(2) { animation-delay: 0.2s; }
+        .education-card:nth-child(3) { animation-delay: 0.3s; }
+
+        .education-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #22c55e, #16a34a);
+        }
+
+        .education-card:hover {
+            transform: translateY(-8px);
+            border-color: #22c55e;
+            box-shadow: 0 20px 40px rgba(34, 197, 94, 0.15);
+        }
+
+        .education-card .degree {
+            font-size: 1.3rem;
+            color: #22c55e;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .education-card .institution {
+            font-size: 1.1rem;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .education-card .year {
+            font-size: 0.9rem;
+            color: #a3a3a3;
+            margin-bottom: 1rem;
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: rgba(34, 197, 94, 0.1);
+            border-radius: 20px;
+        }
+
+        .education-card .gpa {
+            font-size: 1rem;
+            color: #ffffff;
+        }
+
+        .education-card .gpa span {
+            color: #22c55e;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(180deg, #111111 0%, #0a0a0a 100%);
+            text-align: center;
+        }
+
+        .contact-content {
+            max-width: 600px;
+            margin: 0 auto;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .contact-content p {
+            font-size: 1.2rem;
+            color: #d1d5db;
+            margin-bottom: 2rem;
+        }
+
+        .contact-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+            border: 2px solid rgba(34, 197, 94, 0.3);
+            border-radius: 50px;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .contact-link:hover {
+            border-color: #22c55e;
+            background: #22c55e;
+            color: #0a0a0a;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(34, 197, 94, 0.3);
+        }
+
+        .contact-link .icon {
+            font-size: 1.3rem;
+        }
+
+        .contact-form {
+            background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+            padding: 2.5rem;
+            border-radius: 20px;
+            border: 1px solid rgba(34, 197, 94, 0.2);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #a3a3a3;
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            background: #0a0a0a;
+            border: 2px solid #2a2a2a;
+            border-radius: 10px;
+            color: #ffffff;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #22c55e;
+            box-shadow: 0 0 20px rgba(34, 197, 94, 0.2);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+            border: none;
+            border-radius: 10px;
+            color: #0a0a0a;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(34, 197, 94, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: #0a0a0a;
+            border-top: 1px solid rgba(34, 197, 94, 0.2);
+        }
+
+        footer p {
+            color: #a3a3a3;
+            font-size: 0.9rem;
+        }
+
+        footer span {
+            color: #22c55e;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            nav ul {
+                gap: 1rem;
+            }
+
+            nav a {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.9rem;
+            }
+
+            section {
+                padding: 3rem 1.5rem;
+            }
+
+            .hero {
+                padding: 5rem 1.5rem 2rem;
+            }
+
+            .timeline::before {
+                left: 0;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-left: 40px;
+                padding-right: 0;
+            }
+
+            .timeline-item:nth-child(even) {
+                margin-left: 0;
+                padding-left: 40px;
+            }
+
+            .timeline-item::before {
+                left: -8px !important;
+                right: auto !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>MUHAMMAD AMMAR NASRULLAH BIN MOHD KHAIRUL ZAMAN</h1>
+            <p class="subtitle">Information Management Student | Aspiring Data Professional</p>
+           <a href="#about" class="tagline">Building Digital Solutions</a>
+        </div>
+        <div class="scroll-indicator">
+            <span></span>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-content">
+            <div class="about-image">
+               <img
+                src="image/SELFIE AMMAR.jpeg" 
+                alt="Profile Picture"
+                style="
+                    width: 250px;
+                    height: 250px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                    display: block;
+              "> 
+            </div>
+            <div class="about-text">
+                <p>
+                    I am currently a <strong>third-year Diploma student</strong> in <strong>Information Management at Universiti Teknologi MARA (UiTM)</strong>. My interest in technology began when I was first introduced to computers and became curious about how websites and digital systems work. From that moment, I started exploring web development and gradually developed a strong passion for building and understanding digital solutions.
+                </p>
+                <p>
+                   Throughout my studies, I have been improving my skills in <strong>web development, design, and digital media</strong>. I have gained experience in creating simple websites, organizing data, and applying basic design principles through academic projects and self-learning. I enjoy exploring new tools and continuously improving my technical abilities.
+                </p>
+                <p>
+                    In my free time, I like <strong>playing games, editing videos, and doing sports</strong>. These activities help me stay creative and balanced while also improving my focus and problem-solving skills.
+                </p>
+                 <p>
+                    I aim to apply my knowledge in technology and information management to develop effective and impactful solutions that support organizations in making smarter decisions and improving their operational efficiency.
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills" id="skills">
+        <h2 class="section-title">Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <div class="icon">📊</div>
+                <h3>Data Management</h3>
+                <p>Proficient in organizing, storing, and maintaining data integrity across various systems.</p>
+                <div class="skill-bar">
+                    <div class="skill-bar-fill" style="width: 85%;"></div>
+                </div>
+            </div>
+            <div class="skill-card">
+                <div class="icon">📁</div>
+                <h3>Records Management</h3>
+                <p>Skilled in managing organizational records throughout their lifecycle, ensuring compliance and accessibility.</p>
+                <div class="skill-bar">
+                    <div class="skill-bar-fill" style="width: 80%;"></div>
+                </div>
+            </div>
+            <div class="skill-card">
+                <div class="icon">💻</div>
+                <h3>Microsoft Office Suite</h3>
+                <p>Advanced proficiency in Word, Excel, PowerPoint, and Access for documentation and analysis.</p>
+                <div class="skill-bar">
+                    <div class="skill-bar-fill" style="width: 90%;"></div>
+                </div>
+            </div>
+            <div class="skill-card">
+                <div class="icon">🗄️</div>
+                <h3>Database Management</h3>
+                <p>Experience with database systems, data entry, and maintaining accurate digital records.</p>
+                <div class="skill-bar">
+                    <div class="skill-bar-fill" style="width: 75%;"></div>
+                </div>
+            </div>
+            <div class="skill-card">
+                <div class="icon">🌐</div>
+                <h3>Web Development</h3>
+                <p>Fundamental knowledge of HTML, CSS, and basic web design principles.</p>
+                <div class="skill-bar">
+                    <div class="skill-bar-fill" style="width: 70%;"></div>
+                </div>
+            </div>
+            <div class="skill-card">
+                <div class="icon">🔍</div>
+                <h3>Information Retrieval</h3>
+                <p>Skilled in research methodologies and efficient information retrieval techniques.</p>
+                <div class="skill-bar">
+                    <div class="skill-bar-fill" style="width: 85%;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="experience" id="experience">
+        <h2 class="section-title">Work Experience</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>Administrative and HR Intern</h3>
+                    <p class="date">📅 February 2026 - April 2026</p>
+                    <p class="company">Citra Damai Auto Sdn Bhd</p>
+                    <ul>
+                        <li>Entered and verified corporate data, including candidate applications and trainee master records, using Google Sheets and Microsoft Excel.</li>
+                        <li>Structured, proofread, and updated internal corporate memos, office template forms, and onboarding kits using Microsoft Word.</li>
+                        <li>Coordinated on-site manpower logistics, counter setups, and material distribution during the Prelove Fashion Event (PFE) at WTCKL.</li>
+                        <li>Conducted post-event sales reconciliation by cross-referencing physical garment tags with electronic logs to ensure absolute data accuracy.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>Data Entry / Finance Assistant</h3>
+                    <p class="date">📅 July 2023 - September 2023</p>
+                    <p class="company">JJ Motorworld Sdn Bhd</p>
+                    <ul>
+                        <li>Entered and verified financial and customer data into the company database with high accuracy.</li>
+                        <li>Assisted in preparing invoices, receipts, and payment documentation for daily transactions.</li>
+                        <li>Organized and maintained digital and physical financial records for easy reference and audit purposes.</li>
+                        <li>Collaborated with the finance team to ensure timely data updates and smooth administrative workflow.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section class="education" id="education">
+        <h2 class="section-title">Education</h2>
+        <div class="education-grid">
+            <div class="education-card">
+                <p class="degree">Diploma in Information Management</p>
+                <p class="institution">Universiti Teknologi MARA (UiTM), Kampus Rembau</p>
+                <span class="year">2024 - 2026</span>
+                <p class="gpa">Current CGPA: <span>3.30</span></p>
+            </div>
+            <div class="education-card">
+                <p class="degree">Pre-Diploma in Business Studies</p>
+                <p class="institution">Universiti Teknologi MARA (UiTM), Kampus Jengka</p>
+                <span class="year">2024</span>
+                <p class="gpa">CGPA: <span>3.45</span></p>
+            </div>
+            <div class="education-card">
+                <p class="degree">Sijil Pelajaran Malaysia (SPM)</p>
+                <p class="institution">Sekolah Agama Menengah Paya Jaras</p>
+                <span class="year">2022</span>
+                <p class="gpa">&nbsp;</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-content">
+    <p>
+        I'm currently looking for new opportunities. Whether you have a question or just want to say hi, feel free to reach out!
+    </p>
+
+    <div class="contact-links">
+        <a href="mailto:marnasrullah@gmail.com" class="contact-link">
+            <span class="icon">✉️</span>
+            <span>Email Me</span>
+        </a>
+
+        <a href="https://www.linkedin.com/in/muhammad-ammar-nasrullah-mohd-khairul-zaman-259392390/" target="_blank" class="contact-link">
+            <span class="icon">💼</span>
+            <span>LinkedIn</span>
+        </a>
+
+        <a href="https://github.com/AmmarNasrullah47" target="_blank" class="contact-link">
+            <span class="icon">💻</span>
+            <span>GitHub</span>
+        </a>
+    </div>
+
+    <!-- javascript -->
+    <form class="contact-form"
+          onsubmit="event.preventDefault(); alert('Thank you for your message! I will get back to you soon.'); this.reset();">
+
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text"
+                   id="name"
+                   name="name"
+                   placeholder="Your Name"
+                   required>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email"
+                   id="email"
+                   name="email"
+                   placeholder="your.email@example.com"
+                   required>
+        </div>
+
+        <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message"
+                      name="message"
+                      placeholder="Your message here..."
+                      required></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn">
+            Send Message
+        </button>
+    </form>
+</div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 <span>AMMAR NASRULLAH</span>. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
